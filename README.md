@@ -1,0 +1,2 @@
+# InternetSearch_HttpAgent
+用于代理本地http服务，进而实现联网搜索
