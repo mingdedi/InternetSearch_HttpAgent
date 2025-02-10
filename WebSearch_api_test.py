@@ -1,6 +1,7 @@
 import requests
 
 # 读取密钥文件
+#为了防止密钥泄露直接将密钥放到SEARCH_API_KEY.txt文件中
 with open('SEARCH_API_KEY.txt', 'r', encoding='utf-8') as file:
     SEARCH_API_KEY = file.read()
 

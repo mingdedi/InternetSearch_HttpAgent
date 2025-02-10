@@ -24,6 +24,7 @@ def chat_completions():
     'Authorization': f'{auth_header}'
     }
     base_url="https://api.siliconflow.cn/v1/chat/completions"
+    #base_url不会自动进行获取，其余的密钥和模型id都会自动进行获取
     # 构建符合OpenAI API规范的响应
     if stream:
         def generate_stream():
