@@ -42,4 +42,4 @@ def WebSearch(query,txt_count=5):
     return Webtxt
 
 if __name__ == '__main__':
-    print(WebSearch("今天上海的天气是？",txt_count=5))
+    print(WebSearch("学位法中，专业学位的毕业标准",txt_count=10))
