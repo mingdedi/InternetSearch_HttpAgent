@@ -1,5 +1,5 @@
 import requests
-
+import json
 # 读取密钥文件
 #为了防止密钥泄露直接将密钥放到SEARCH_API_KEY.txt文件中
 with open('SEARCH_API_KEY.txt', 'r', encoding='utf-8') as file:
@@ -25,15 +25,19 @@ def WebSearch(query,txt_count=5):
     try:
         print("开始联网搜索")
         response = requests.post(
-            "https://api.bochaai.com/v1/web-search",
+            "https://api.bochaai.com/v1/ai-search",
             headers=headers,
             json=payload
         )
-        response.raise_for_status()  # 检查 HTTP 错误
+        response.raise_for_status()  # 检查 HTTP 错误 
         i=0
-        for value in response.json()["data"]["webPages"]["value"]:
-            Webtxt=Webtxt+f"参考资料id：{i}\n"+value["snippet"]+"\n"
+        for value in json.loads((response.json()["messages"][0]["content"]))["value"]:
+            Webtxt=Webtxt+f"参考资料id：{i}\n"+value["summary"]+"\n"
             i+=1
+        #为了兼容web-search添加的代码
+        # for value in response.json()["data"]["webPages"]["value"]:
+        #     Webtxt=Webtxt+f"参考资料id：{i}\n"+value["snippet"]+"\n"
+        #     i+=1
          # 解析并叠加响应
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {e}")
@@ -42,4 +46,4 @@ def WebSearch(query,txt_count=5):
     return Webtxt
 
 if __name__ == '__main__':
-    print(WebSearch("学位法中，专业学位的毕业标准",txt_count=10))
+    print(WebSearch("2025年2月11日上海市的天气如何？",txt_count=10))
